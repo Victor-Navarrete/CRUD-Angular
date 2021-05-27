@@ -1,0 +1,76 @@
+<h1 style="text-align: center; margin-bottom: 30px;" *ngIf="!isCreateNewPost;">CRUD Angular</h1>
+
+
+<!--Tabla para mostrar los datos de los posts-->
+<ng-container *ngIf="!isCreateNewPost;">
+
+  <button style="float:right; margin-right: 165px;" (click)="CrearNuevoPost()">Create New Post</button>
+
+  <table border="1" style="max-width: 1000px; margin: 0 auto; margin-top: 100px;">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th colspan="2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{post.id}}</td>
+        <td>{{post.title}}</td>
+        <td>{{post.body}}</td>
+        <td><button type="button" >Update</button></td>
+        <td><button type="button" (click)="EliminarPost(post.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+</ng-container>
+
+<!-- Crear un nuevo Post -->
+<ng-container *ngIf="isCreateNewPost;">
+  <h1 style="text-align: center;margin-bottom: 30px;">Create New Post</h1>
+  <div style="text-align: center;">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div>
+        <label for="title">Title:</label>
+        <input formControlName="title" id="title" type="text">
+      </div><br>
+
+      <div>
+        <label for="body">Body:</label>
+        <textarea formControlName="body" id="body" type="text">
+          </textarea>
+      </div><br>
+
+      <button type="submit" [disabled]="!form.valid">Submit</button><br><br><br>
+      <button type="button" (click) = "RegresarHome()">Back</button>
+    </form>
+  </div>
+
+</ng-container>
+
+
+<!--Actualizar un post-->
+
+<ng-container *ngIf="isUpdateApost;">
+  <h1 style="text-align: center;margin-bottom: 30px;">Update A Post</h1>
+  <div style="text-align: center;">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div>
+        <label for="title">Title:</label>
+        <input formControlName="title" id="title" type="text">
+      </div><br>
+      <div>
+        <label for="body">Body:</label>
+        <textarea formControlName="body" id="body" type="text">
+          </textarea>
+      </div><br>
+      <button type="submit" [disabled]="!form.valid">Submit</button><br><br><br>
+    </form>
+  </div>
+
+</ng-container>
